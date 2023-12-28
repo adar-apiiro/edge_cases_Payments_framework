@@ -11,7 +11,7 @@ public class Server {
     public static void main(String[] args) throws StripeException {
         Stripe.apiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
 
-
+        // Create product
         ProductCreateParams productParams =
             ProductCreateParams.builder()
                 .setName("Starter Subscription")
@@ -20,12 +20,13 @@ public class Server {
         Product product = Product.create(productParams);
         System.out.println("Success! Here is your starter subscription product id: " + product.getId());
 
+        // Create price
         PriceCreateParams params =
             PriceCreateParams
                 .builder()
                 .setProduct(product.getId())
                 .setCurrency("usd")
-                .setUnitAmount(1200L)
+                .setUnitAmount(1200L)  // Set the unit amount in cents (12 dollars)
                 .setRecurring(
                     PriceCreateParams.Recurring
                         .builder()
